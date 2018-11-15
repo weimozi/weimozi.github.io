@@ -209,77 +209,17 @@
 
 <div class="post-preview">
 
-    <a href="/article/CSS-1/">
+    <a href="/article/2018-11-12-css-value/">
         <h2 class="post-title">
-            CSS
+            css 属性值
         </h2>
         <h3 class="post-subtitle">
-            
+            css 属性值计算 
         </h3>
         <div class="post-content-preview">
-            ...
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 为墨子 on
-            2018-11-12
-        </p>
-        <div class="tags">
             
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/CSS/">
-        <h2 class="post-title">
-            CSS
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            ...
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 为墨子 on
-            2018-11-12
-        </p>
-        <div class="tags">
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/BFC/">
-        <h2 class="post-title">
-            BFC
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            BFC
-形成BFC的元素：
-
-floats 不是 none
-absolute positioned elements absolute／fixed
-block container 但不是 block box的
-
-我觉得他们生成BFC的原因是因为 他们的内部都会形成一个透明的 block box。所以他们包含的有block-level box，就生成BF
-
-
-inline-block ，其他的......
+Once a user agent has parsed a document and constructed a document tree, it must assign, for every element in the tree, a value to every property that applies to the target media type.
+一旦UA解析完文档并且......
         </div>
     </a>
     
@@ -299,33 +239,154 @@ inline-block ，其他的......
 
 <div class="post-preview">
 
-    <a href="/article/hexo-theme-huweihuang/">
+    <a href="/article/IFC/">
         <h2 class="post-title">
-            [Hexo] Theme HuWeihuang
+            Inline Formatting Context / IFC
         </h2>
         <h3 class="post-subtitle">
-            This is hexo theme Demo.
+            This is about IFC
         </h3>
         <div class="post-content-preview">
-            
-This HuWeihuang theme created by HuWeihuang modified from the original Porter YuHsuan
+            IFC 介绍
+定义
 
-Live Demo
-Hu Weihuang Blog : www.huweihuang.com
+它是一个独立的渲染区域，只有inline-level box参与， 它规定了内部的inline-level Box如何布局。
 
-Install Hexo
-Install Node.js  and Git
-123#For Macbrew instal......
+实例
+
+只包含inline-block box，而且display：block 的box。
+只包含inline-block box，本身是anonymous block box。
+
+创建IFC 条件
+
+不包含 block-level boxes......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 为墨子 on
-            2017-09-18
+            2018-11-12
         </p>
         <div class="tags">
             
-              <a href="/tags/#Hexo" title="Hexo">Hexo</a>
+              <a href="/tags/#CSS" title="CSS">CSS</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/title css selector/">
+        <h2 class="post-title">
+            css selector
+        </h2>
+        <h3 class="post-subtitle">
+            css 属性值计算 
+        </h3>
+        <div class="post-content-preview">
+            存档，方便之后记忆
+选择器
+
+
+
+Pattern
+Meaning
+
+
+
+
+*
+Matches any element.
+
+
+E
+Matches any E element (i.e., an element of type E)
+
+
+E F
+Matches any F element that is a descendant of an E element.
+
+
+E &gt; F
+Match......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 为墨子 on
+            2018-11-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#CSS" title="CSS">CSS</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/BFC/">
+        <h2 class="post-title">
+            Block Formatting Context ／FC
+        </h2>
+        <h3 class="post-subtitle">
+            This is about BFC and IFC
+        </h3>
+        <div class="post-content-preview">
+            前提知识
+FC／Formatting Context
+
+定义：box形成的一个渲染区域，定义了它的子box的排列方式，子box之间关系、子box与它的关系，是它包含的子 box 的排列规则。
+注意：box 的排列规则是由它祖先的box 决定的。
+问题：float 以及 决定定位也满足他吗？
+分类：
+
+Block formatting context (block-level box 参与 B......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 为墨子 on
+            2018-11-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#CSS" title="CSS">CSS</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/line-box/">
+        <h2 class="post-title">
+            line box
+        </h2>
+        <h3 class="post-subtitle">
+            line box's height 
+        </h3>
+        <div class="post-content-preview">
+            
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 为墨子 on
+            2018-11-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#CSS" title="CSS">CSS</a>
             
         </div>
     
@@ -370,7 +431,7 @@ Install Node.js  and Git
     <div class="tags">
         
             
-        
+            <a href="/tags/#CSS" title="CSS" rel="5">CSS</a>
             
         
     </div>
@@ -426,19 +487,23 @@ Install Node.js  and Git
     <ul>
       
         <li>
-          <a href="/article/CSS-1/">CSS</a>
+          <a href="/article/2018-11-12-css-value/">css 属性值</a>
         </li>
       
         <li>
-          <a href="/article/CSS/">CSS</a>
+          <a href="/article/IFC/">Inline Formatting Context / IFC</a>
         </li>
       
         <li>
-          <a href="/article/BFC/">BFC</a>
+          <a href="/article/title css selector/">css selector</a>
         </li>
       
         <li>
-          <a href="/article/hexo-theme-huweihuang/">[Hexo] Theme HuWeihuang</a>
+          <a href="/article/BFC/">Block Formatting Context ／FC</a>
+        </li>
+      
+        <li>
+          <a href="/article/line-box/">line box</a>
         </li>
       
     </ul>
@@ -459,7 +524,7 @@ Install Node.js  and Git
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>

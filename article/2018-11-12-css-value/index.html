@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          为墨子 | Blog
+          css 属性值 - 为墨子 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://weimozi.github.io/tags/Hexo/">
+    <link rel="canonical" href="https://weimozi.github.io/article/2018-11-12-css-value/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/archives-widget.jpg')
-            /*page*/
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>为墨子</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">个人博客</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#CSS" title="CSS">CSS</a>
+                            
+                        </div>
+                        <h1>css 属性值</h1>
+                        <h2 class="subheading">css 属性值计算 </h2>
+                        <span class="meta">
+                            Posted by 为墨子 on
+                            2018-11-12
+                        </span>
                     </div>
                 
 
@@ -189,242 +197,253 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
-            
-            
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <blockquote>
+<p>Once a user agent has parsed a document and constructed a document tree, it must assign, for every element in the tree, a value to every property that applies to the target media type.</p>
+<p>一旦UA解析完文档并且构造了文档树，它必须为树中每个元素适用于目标媒体类型的属性赋值</p>
+</blockquote>
+<p>本文主要讲解用户代理如果得出最终渲染的属性值的过程，先说一下总的步骤，然后对每一步进行具体的讲解。</p>
+<p>注：基本就是CSS2.2文档第6章的内容，加上自己一点点理解，可以直接看<a href="https://www.w3.org/TR/CSS22/cascade.html" target="_blank" rel="noopener">文档</a>。</p>
+<h5 id="整体步骤">整体步骤</h5>
+<ul>
+<li>通过指定、继承或者初始值来确定指定值。／the specified value</li>
+<li>处理指定值得到一个用于继承的值／computed value</li>
+<li>如果需要的话，转化为一个固定的值／the used value</li>
+<li>然后根据本地环境限制转化为一个实际应用值。／actual valu</li>
+</ul>
+<h5 id="1确认指定值-specified-value">1.确认指定值/ specified value</h5>
+<p>UA必须按照以下机制（优先顺序）给每一个元素指定值。</p>
+<ul>
+<li>如果层叠（cascade）产生了值，就用它。（选取样式表中权重最高的规则）</li>
+<li>UA（user agent，一般指浏览器）、User（查看页面的人，可以通过浏览器默认样式来修改 default style sheet）、Author（编写页面者）都可以设置元素样式，他们之间会有设置重叠的部分，css cascade 规定了它们的优先级，最终应用优先级最大的。</li>
+<li>如果无指定的值而且这个值可继承，使用父元素计算出来的值。
+<ul>
+<li>root元素没有可以继承的属性值，所以设置root元素没有指定的指之后，直接应用默认值。</li>
+</ul>
+</li>
+<li>否则使用属性的初始值，每个属性的初始值都在属性的定义中。</li>
+</ul>
+<p>总结：层叠优先级最高的值  || 继承值 || 初始值</p>
+<h5 id="2-用于继承的计算值computed-value">2. 用于继承的计算值／computed value</h5>
+<ul>
+<li>
+<p>获取computed value不需要用户代理渲染文档，所以如果指定值对应的值是需要渲染文档才能确认，那么计算值和指定值相同。</p>
+<ul>
+<li>如，width: 100% 这个需要等到文档渲染之后，才能确认固定值。而line-height：120%，依据的是font-size的值，可以直接求出来。</li>
+</ul>
+</li>
+<li>
+<p>如果不依赖渲染文档，计算值取决于属性定义的computed value line决定（在MDN都可以找到），告知不同的属性数据类型对应的计算值计算方法。如果值为inherit，采用与父级属性相同过的指定值。</p>
+<ul>
+<li>如：line-height 的 computed value 写的是</li>
+</ul>
+<blockquote>
+<p>for percentage and length values, the absolute length, otherwise as specified</p>
+</blockquote>
+<ul>
+<li>那么对于百分比，有单位的长度值，直接使用固定的值，百分比乘以font-size 算出固定值，而normal 或者 <number> 保持原样。（有单位的值长度值区分 固定（eg: px）和 相对（eg: em）,具体查看<a href="https://www.w3.org/TR/CSS22/syndata.html#length-units" target="_blank" rel="noopener">文档</a>）</number></li>
+<li>所以可以看到一般推荐使用 <number> 来定义line-height，如果使用百分比，对应的line-height 是继承的父元素的固定的值，不由自身font-size 决定。</number></li>
+</ul>
+</li>
+<li>
+<p>即使属性不适用当前元素、其计算值也存在（是否适用，在apply to这行）。然而，有些属性可能根据属性是否适用于该元素来定义元素属性的计算值。</p>
+</li>
+<li>
+<p><strong>注意：</strong> 子元素继承父元素的值都对应的父元素的计算值。</p>
+</li>
+</ul>
+<h5 id="3used-values-应用值">3.Used values ／应用值</h5>
+<ul>
+<li>处理计算值所有依赖（包括依赖的是渲染文档之后才能确认的值），生成固定的值。</li>
+<li>比如，width为100%，会计算为固定的值。</li>
+</ul>
+<h5 id="4actual-values实际值">4.Actual values／实际值</h5>
+<ul>
+<li>原则上 应用值可以用于渲染啦，但是现有的浏览器无法直接应用这个值，如PC上写font-size 为 8px。border-radius 为0.5px，比如设定了max-width，所以还需要环境进行特殊处理。</li>
+<li>实际值是通过近似处理的应用值</li>
+</ul>
+<h5 id="css属性定义"><a href="https://www.w3.org/TR/CSS22/about.html#property-defs" target="_blank" rel="noopener">CSS属性定义</a></h5>
+<table>
+<thead>
+<tr>
+<th>Name:</th>
+<th>property-name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value:</td>
+<td>legal values &amp; syntax</td>
+</tr>
+<tr>
+<td>Initial:</td>
+<td>initial value</td>
+</tr>
+<tr>
+<td>Applies to:</td>
+<td>elements this property applies to</td>
+</tr>
+<tr>
+<td>Inherited:</td>
+<td>whether the property is inherited</td>
+</tr>
+<tr>
+<td>Percentages:</td>
+<td>how percentage values are interpreted</td>
+</tr>
+<tr>
+<td>Media:</td>
+<td>which media groups the property applies to</td>
+</tr>
+<tr>
+<td>Computed value:</td>
+<td>how to compute the computed value</td>
+</tr>
+</tbody>
+</table>
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
-                    <span class="tag-text">2018</span>
-                </span>
-                <ul>
                 
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    11-12
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/article/CSS-1/" style="color: #0085a1">
-                        <span>
-                            CSS
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    11-12
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/article/CSS/" style="color: #0085a1">
-                        <span>
-                            CSS
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    11-12
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/article/BFC/" style="color: #0085a1">
-                        <span>
-                            BFC
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/IFC/" data-toggle="tooltip" data-placement="top" title="Inline Formatting Context / IFC">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2017">
-                    <span class="tag-text">2017</span>
-                </span>
-                <ul>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    09-18
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/article/hexo-theme-huweihuang/" style="color: #0085a1">
-                        <span>
-                            [Hexo] Theme HuWeihuang
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                </ul>
-            </div>
-            
-
-
-        </div>
-    </div>
-</div>
 
                 <br>
-
+                
                 <!-- require APlayer -->
                 
 
-                <!-- 如果开启评论功能 -->
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#整体步骤"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6574;&#x4F53;&#x6B65;&#x9AA4;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1确认指定值-specified-value"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1.&#x786E;&#x8BA4;&#x6307;&#x5B9A;&#x503C;/ specified value</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-用于继承的计算值computed-value"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">2. &#x7528;&#x4E8E;&#x7EE7;&#x627F;&#x7684;&#x8BA1;&#x7B97;&#x503C;&#xFF0F;computed value</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3used-values-应用值"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">3.Used values &#xFF0F;&#x5E94;&#x7528;&#x503C;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4actual-values实际值"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">4.Actual values&#xFF0F;&#x5B9E;&#x9645;&#x503C;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#css属性定义"><span class="toc-nav-number">6.</span> <span class="toc-nav-text"><a href="https://www.w3.org/TR/CSS22/about.html#property-defs" target="_blank" rel="noopener">CSS&#x5C5E;&#x6027;&#x5B9A;&#x4E49;</a></span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#CSS" title="CSS">CSS</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/avatar/ironman.png" />
-        
 
-        
-            <p>Stay hungry,Stay foolish</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/weimozi">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
 
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/article/CSS-1/">CSS</a>
-        </li>
-      
-        <li>
-          <a href="/article/CSS/">CSS</a>
-        </li>
-      
-        <li>
-          <a href="/article/BFC/">BFC</a>
-        </li>
-      
-        <li>
-          <a href="/article/hexo-theme-huweihuang/">[Hexo] Theme HuWeihuang</a>
-        </li>
-      
-    </ul>
-  </div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->

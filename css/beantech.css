@@ -83,6 +83,9 @@ h6 {
 h4 {
   font-size: 21px;
 }
+li {
+  list-style-type: none;
+}
 a {
   color: #404040;
 }
